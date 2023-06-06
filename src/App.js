@@ -11,6 +11,7 @@ import {
   SideMenu
 } from './layouts'
 import { COLORS } from './utils/theme'
+import NodzFormContainer from './containers/NodzForm'
 
 const App = () => {
   useEffect(() => {
@@ -42,6 +43,7 @@ const App = () => {
           </HeaderMenu>
         </Header>
         <PageContainer>
+          <NodzFormContainer />
         </PageContainer>
       </FlexContainer>
     </Container>
