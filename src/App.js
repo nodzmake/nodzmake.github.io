@@ -1,7 +1,7 @@
 import './App.css'
 
 import { APP_NAME } from './utils/constants'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Container,
   FlexContainer,
@@ -11,12 +11,22 @@ import {
   SideMenu
 } from './layouts'
 import { COLORS } from './utils/theme'
+import Splash from './components/Splash'
 
 const App = () => {
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     document.title = APP_NAME
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
   }, [])
-  return (
+  return loading ? (
+    <Splash />
+  ) : (
     <Container>
       <SideMenu style={{ color: COLORS['@text-color'] }}>
         <h2>{APP_NAME}</h2>
@@ -41,8 +51,7 @@ const App = () => {
             <li>menu</li>
           </HeaderMenu>
         </Header>
-        <PageContainer>
-        </PageContainer>
+        <PageContainer></PageContainer>
       </FlexContainer>
     </Container>
   )
