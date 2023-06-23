@@ -1,5 +1,4 @@
 import './App.css'
-
 import { APP_NAME } from './utils/constants'
 import { useEffect, useState } from 'react'
 import {
@@ -9,8 +8,8 @@ import {
   HeaderMenu,
   PageContainer,
   SideMenu
-} from './layouts'
-import { COLORS } from './utils/theme'
+} from './layouts/'
+import COLORS from './utils/theme'
 import Splash from './components/Splash'
 
 const App = () => {

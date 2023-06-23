@@ -1,4 +1,4 @@
-import { COLORS } from '../../utils/theme'
+import COLORS from '../../utils/theme'
 import NodzMakeSvg from './nodzmake'
 
 const Splash = () => {
