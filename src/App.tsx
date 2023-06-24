@@ -12,6 +12,7 @@ import {
 import COLORS from './utils/theme'
 import Splash from './components/Splash'
 import NodzFormContainer from './containers/NodzForm'
+import Output from './components/Output'
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -20,7 +21,7 @@ const App = () => {
     document.title = APP_NAME
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 2000)
+    }, 500)
 
     return () => clearTimeout(timer)
   }, [])
@@ -38,22 +39,34 @@ const App = () => {
       </SideMenu>
       <FlexContainer
         style={{
-          flexDirection: 'column',
+          flexDirection: 'row',
           overflow: 'hidden',
           width: '100%',
           backgroundColor: COLORS['@container-background']
         }}
       >
-        <Header>
-          <HeaderMenu>
-            <li>menu</li>
-            <li>menu</li>
-            <li>menu</li>
-          </HeaderMenu>
-        </Header>
-        <PageContainer>
-          <NodzFormContainer />
+        <PageContainer
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center'
+          }}
+        >
+          <Output />
         </PageContainer>
+        <SideMenu
+          style={{
+            flex: 1,
+            color: COLORS['@text-color'],
+            height: '100%',
+            maxWidth: '20%',
+            justifyContent: 'flex-end'
+          }}
+        >
+          <h2>{APP_NAME}</h2>
+          <NodzFormContainer />
+        </SideMenu>
       </FlexContainer>
     </Container>
   )
