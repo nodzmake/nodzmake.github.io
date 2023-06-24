@@ -14,6 +14,4 @@ const COLORS = {
   '@table-row-hover-bg': '#D3EBE0'
 }
 
-module.exports = {
-  COLORS
-}
+export default COLORS 
