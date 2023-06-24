@@ -1,9 +1,9 @@
 const COLORS = {
-  '@primary-color': '#c11f1f',
+  '@primary-color': '#242424',
   '@link-color': '#0085F2',
   '@btn-active': '#fcb500',
-  '@container-background': '#e5e5e5',
-  '@container-content-background': '#fff',
+  '@container-background': '#000000',
+  '@container-content-background': '#000000',
   '@success-color': '#7AC2A1',
   '@warning-color': '#fcb204',
   '@error-color': '#F0485E',

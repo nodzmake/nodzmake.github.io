@@ -7,7 +7,7 @@ export const Container = styled.div`
 `
 
 export const Header = styled.div`
-  background-color: #f2f2f2;
+  background-color: #282828;
   height: 60px;
   padding: 20px;
   display: flex;
@@ -26,6 +26,9 @@ export const HeaderMenu = styled.menu`
 
 export const PageContainer = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   overflow-y: auto;
   overflow-x: auto;
   padding: 10px;
