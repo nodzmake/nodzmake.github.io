@@ -1,9 +1,10 @@
-const output = require('../../assets/images/output.png')
+// const output = require('../../assets/images/output.png')
+import { PhotoPlaceholder } from 'react-placeholder-image';
 
 const Output = () => {
   return (
     <div>
-      <img src={output} />
+      <PhotoPlaceholder width={716} height={407} />
     </div>
   )
 }
