@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import {
   Container,
   FlexContainer,
-  Header,
-  HeaderMenu,
+  // Header,
+  // HeaderMenu,
   PageContainer,
   SideMenu
 } from './layouts/'

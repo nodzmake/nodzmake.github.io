@@ -25,6 +25,7 @@ const BabylonScene = ({ width = 716, height = 407 }) => {
         new BABYLON.Vector3(0, 1, 0),
         scene
       )
+      console.log(light);
       const box = BABYLON.MeshBuilder.CreateBox(
         'box',
         { size: 2, height: 2 },
