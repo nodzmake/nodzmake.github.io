@@ -17,7 +17,7 @@ export const Header = styled.div`
 export const SideMenu = styled.div`
   width: 200px;
   background-color: ${COLORS['@primary-color']};
-  padding: 20px;
+  padding: 5px;
 `
 
 export const HeaderMenu = styled.menu`
