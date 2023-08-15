@@ -4,15 +4,13 @@ import { useEffect, useState } from 'react'
 import {
   Container,
   FlexContainer,
-  // Header,
-  // HeaderMenu,
   PageContainer,
   SideMenu
 } from './layouts/'
 import COLORS from './utils/theme'
 import Splash from './components/Splash'
-import NodzFormContainer from './containers/NodzForm'
 import Output from './components/Output'
+import CanvasSettings from './components/CanvasSettings'
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -64,8 +62,7 @@ const App = () => {
             justifyContent: 'flex-end'
           }}
         >
-          <h2>{APP_NAME}</h2>
-          <NodzFormContainer />
+          <CanvasSettings bColor={COLORS['@primary-color']}/>
         </SideMenu>
       </FlexContainer>
     </Container>
