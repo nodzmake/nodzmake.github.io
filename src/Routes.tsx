@@ -3,16 +3,19 @@ import App from './App'
 import Sheet from './components/Sheet'
 
 const AppRouter = () => {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <App />
-    },
-    {
-      path: '/sheet',
-      element: <Sheet />
-    }
-  ])
+  const router = createBrowserRouter(
+    [
+      {
+        path: '/',
+        element: <App />
+      },
+      {
+        path: '/sheet',
+        element: <Sheet />
+      }
+    ],
+    { basename: '/' }
+  )
 
   return <RouterProvider router={router} />
 }
