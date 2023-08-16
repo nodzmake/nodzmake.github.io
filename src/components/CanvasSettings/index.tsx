@@ -1,4 +1,11 @@
-import { Collapse, Slider, Button } from 'antd'
+import {
+  Collapse,
+  Slider,
+  Button,
+  Segmented,
+  InputNumber,
+  ColorPicker
+} from 'antd'
 import styled from 'styled-components'
 
 const StyledInput = styled.input`
@@ -9,7 +16,6 @@ const StyledInput = styled.input`
   box-sizing: border-box;
   overflow-wrap: break-word;
   font-family: inherit;
-  margin: 0px;
   overflow: visible;
   padding: 0px;
   width: 100%;
@@ -36,7 +42,6 @@ const StyledInput = styled.input`
     box-sizing: border-box;
     overflow-wrap: break-word;
     font-family: inherit;
-    margin: 0px;
     overflow: visible;
     padding: 0px;
     width: 100%;
@@ -82,7 +87,7 @@ const StyledInput = styled.input`
     border: 0.125rem solid transparent;
     background: rgb(66, 66, 66);
     color: rgb(255, 255, 255);
-    background-color: rgb(48,48,48);
+    background-color: rgb(48, 48, 48);
   }
 `
 
@@ -154,10 +159,17 @@ const StyledCollapse = styled(Collapse)`
     align-items: center;
     color: #715df2;
     background: #242424;
-    background: #fcb500;
-    height:100px;
-    &:hover{
+    height: 100px;
+    padding: 0 !important;
+    margin: 0 !important;
+    &:hover {
       border-width: 2px;
+    }
+  }
+  .ant-collapse-arrow {
+    transform: rotate(90deg) !important;
+    &:hover {
+      transform: rotate(-90deg) !important;
     }
   }
 
@@ -210,11 +222,6 @@ const StyledCollapse = styled(Collapse)`
 `
 
 const CanvasSettings = ({ bColor }: any) => {
-  const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`
   const items = [
     {
       key: '1',
@@ -229,27 +236,87 @@ const CanvasSettings = ({ bColor }: any) => {
     {
       key: '2',
       label: 'Direction',
-      children: <StyledInput></StyledInput>
+      children: (
+        <>
+          <StyledInput></StyledInput>
+        </>
+      )
     },
     {
       key: '3',
       label: 'Ground',
-      children: <p>{text}</p>
+      children: (
+        <>
+          <Slider defaultValue={50}></Slider>
+          <Slider defaultValue={80}></Slider>
+          <Slider defaultValue={10}></Slider>
+          <Slider defaultValue={40}></Slider>
+        </>
+      )
     },
     {
       key: '4',
       label: 'Sky',
-      children: <p>{text}</p>
+      children: (
+        <Segmented
+          options={[
+            {
+              label: (
+                <div style={{ padding: 4 }}>
+                  <div>Spring</div>
+                  <div>Jan-Mar</div>
+                </div>
+              ),
+              value: 'spring'
+            },
+            {
+              label: (
+                <div style={{ padding: 4 }}>
+                  <div>Summer</div>
+                  <div>Apr-Jun</div>
+                </div>
+              ),
+              value: 'summer'
+            },
+            {
+              label: (
+                <div style={{ padding: 4 }}>
+                  <div>Autumn</div>
+                  <div>Jul-Sept</div>
+                </div>
+              ),
+              value: 'autumn'
+            },
+            {
+              label: (
+                <div style={{ padding: 4 }}>
+                  <div>Winter</div>
+                  <div>Oct-Dec</div>
+                </div>
+              ),
+              value: 'winter'
+            }
+          ]}
+        />
+      )
     },
     {
       key: '5',
       label: 'Texture',
-      children: <p>{text}</p>
+      children: (
+        <InputNumber
+          size='large'
+          min={1}
+          max={100000}
+          defaultValue={3}
+          onChange={n => console.log({ n })}
+        />
+      )
     },
     {
       key: '6',
       label: 'Color',
-      children: <p>{text}</p>
+      children: <ColorPicker size='large' showText />
     }
   ]
   return (

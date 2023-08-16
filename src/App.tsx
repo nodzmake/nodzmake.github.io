@@ -1,12 +1,7 @@
 import './App.css'
 import { APP_NAME } from './utils/constants'
 import { useEffect, useState } from 'react'
-import {
-  Container,
-  FlexContainer,
-  PageContainer,
-  SideMenu
-} from './layouts/'
+import { Container, FlexContainer, PageContainer, SideMenu } from './layouts/'
 import COLORS from './utils/theme'
 import Splash from './components/Splash'
 import Output from './components/Output'
@@ -58,11 +53,11 @@ const App = () => {
             flex: 1,
             color: COLORS['@text-color'],
             height: '100%',
-            maxWidth: '20%',
+            maxWidth: '25%',
             justifyContent: 'flex-end'
           }}
         >
-          <CanvasSettings bColor={COLORS['@primary-color']}/>
+          <CanvasSettings bColor={COLORS['@primary-color']} />
         </SideMenu>
       </FlexContainer>
     </Container>
