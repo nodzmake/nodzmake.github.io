@@ -1,5 +1,5 @@
 const COLORS = {
-  '@primary-color': '#242424',
+  '@primary-color': '#171717',
   '@link-color': '#0085F2',
   '@btn-active': '#fcb500',
   '@container-background': '#000000',
