@@ -6,6 +6,7 @@ import COLORS from './utils/theme'
 import Splash from './components/Splash'
 import Output from './components/Output'
 import CanvasSettings from './components/CanvasSettings'
+import ProcessButton from './components/ProcessButton'
 
 const App = () => {
   const [loading, setLoading] = useState(true)
@@ -47,6 +48,7 @@ const App = () => {
           }}
         >
           <Output />
+          <ProcessButton/>
         </PageContainer>
         <SideMenu
           style={{
