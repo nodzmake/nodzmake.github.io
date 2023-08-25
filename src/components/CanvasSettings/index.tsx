@@ -124,12 +124,12 @@ const StyledCollapse = styled(Collapse)`
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    width: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     transition: all 0.2s;
     outline: 0;
     font-size: 1rem;
     margin-right: 0.375rem;
-    height: 2.5rem;
     border-radius: 9999px;
     padding: 0;
     -webkit-box-pack: center;
@@ -139,37 +139,8 @@ const StyledCollapse = styled(Collapse)`
     color: #494949;
   }
 
-  .ant-collapse-expand-icon {
-    text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    border: 1px solid rgba(255, 255, 255, 0.125);
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    font-family: inherit;
-    margin: 0px;
-    text-transform: none;
-    cursor: pointer;
-    line-height: inherit;
-    display: flex;
-    align-items: center;
-    transition: all 0.2s;
-    outline: 1;
-    font-size: 1rem;
-    padding: 0;
-    align-items: center;
-    color: #715df2;
-    background: #242424;
-    height: 100px;
-    padding: 0 !important;
-    margin: 0 !important;
-    &:hover {
-      border-width: 2px;
-    }
-  }
   .ant-collapse-arrow {
-    transform: rotate(90deg) !important;
     &:hover {
-      transform: rotate(-90deg) !important;
     }
   }
 
@@ -178,7 +149,7 @@ const StyledCollapse = styled(Collapse)`
   }
 
   .ant-collapse-item {
-    color: #fff;
+    border-bottom: 1px solid #303030;
   }
 
   .ant-collapse-header {
