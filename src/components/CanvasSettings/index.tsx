@@ -103,6 +103,10 @@ const StyledCollapse = styled(Collapse)`
   .ant-motion-collapse {
     transition: height 0.005s !important;
   }
+  .ant-collapse-header .ant-collapse-arrow{
+    font-size: 1rem!important;
+    padding-right:2.5px;
+  }
 
   .ant-collapse-expand-icon {
     text-size-adjust: 100%;
@@ -137,15 +141,14 @@ const StyledCollapse = styled(Collapse)`
     margin-inline-start: 0.5rem;
     margin-top: 0;
     color: #494949;
-  }
-
-  .ant-collapse-arrow {
-    &:hover {
+    background-color:#202020;
+    &:hover{
+      background-color:#303030;
     }
   }
 
   .ant-collapse-header .ant-collapse-expand-icon {
-    height: 50px;
+    justify-content:end;
   }
 
   .ant-collapse-item {
@@ -154,6 +157,7 @@ const StyledCollapse = styled(Collapse)`
 
   .ant-collapse-header {
     color: #fff;
+    padding-inline-start: 2px;
   }
 
   .ant-collapse-content-box {
