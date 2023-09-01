@@ -1,12 +1,8 @@
-import {
-  Collapse,
-  Slider,
-  Button,
-  Segmented,
-  InputNumber,
-  ColorPicker
-} from 'antd'
+import { Collapse, Slider, Button, InputNumber, ColorPicker, Radio } from 'antd'
 import styled from 'styled-components'
+import { skyEnvironments } from '../Babylon/Utils'
+
+const StyledRadio = styled(Radio)``
 
 const StyledInput = styled.input`
   text-size-adjust: 100%;
@@ -103,9 +99,9 @@ const StyledCollapse = styled(Collapse)`
   .ant-motion-collapse {
     transition: height 0.005s !important;
   }
-  .ant-collapse-header .ant-collapse-arrow{
-    font-size: 1rem!important;
-    padding-right:2.5px;
+  .ant-collapse-header .ant-collapse-arrow {
+    font-size: 1rem !important;
+    padding-right: 2.5px;
   }
 
   .ant-collapse-expand-icon {
@@ -141,14 +137,14 @@ const StyledCollapse = styled(Collapse)`
     margin-inline-start: 0.5rem;
     margin-top: 0;
     color: #494949;
-    background-color:#202020;
-    &:hover{
-      background-color:#303030;
+    background-color: #202020;
+    &:hover {
+      background-color: #303030;
     }
   }
 
   .ant-collapse-header .ant-collapse-expand-icon {
-    justify-content:end;
+    justify-content: end;
   }
 
   .ant-collapse-item {
@@ -233,46 +229,16 @@ const CanvasSettings = ({ bColor }: any) => {
       key: '4',
       label: 'Sky',
       children: (
-        <Segmented
-          options={[
-            {
-              label: (
-                <div style={{ padding: 4 }}>
-                  <div>Spring</div>
-                  <div>Jan-Mar</div>
-                </div>
-              ),
-              value: 'spring'
-            },
-            {
-              label: (
-                <div style={{ padding: 4 }}>
-                  <div>Summer</div>
-                  <div>Apr-Jun</div>
-                </div>
-              ),
-              value: 'summer'
-            },
-            {
-              label: (
-                <div style={{ padding: 4 }}>
-                  <div>Autumn</div>
-                  <div>Jul-Sept</div>
-                </div>
-              ),
-              value: 'autumn'
-            },
-            {
-              label: (
-                <div style={{ padding: 4 }}>
-                  <div>Winter</div>
-                  <div>Oct-Dec</div>
-                </div>
-              ),
-              value: 'winter'
-            }
-          ]}
-        />
+        <div style={{ overflow: 'scroll', height: '300px' }}>
+          <Radio.Group>
+            {Object.keys(skyEnvironments).map(option => (
+              <StyledRadio key={option} value={option}>
+                <img src='https://picsum.photos/90/90' alt='weather-icon'/>
+                {option}
+              </StyledRadio>
+            ))}
+          </Radio.Group>
+        </div>
       )
     },
     {
@@ -297,7 +263,7 @@ const CanvasSettings = ({ bColor }: any) => {
   return (
     <StyledCollapse
       items={items}
-      defaultActiveKey={['1']}
+      defaultActiveKey={['1', '2', '3', '5']}
       onChange={e => console.log({ e })}
       bordered={false}
       expandIconPosition={'end'}

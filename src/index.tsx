@@ -4,10 +4,15 @@ import AppRouter from './Routes'
 import './index.css'
 
 import reportWebVitals from './reportWebVitals'
+import { BrowserRouter } from 'react-router-dom'
+import Navigator from './components/Devs/Navigator'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <AppRouter />
+    <BrowserRouter>
+      <Navigator />
+      <AppRouter />
+    </BrowserRouter>
   </React.StrictMode>
 )
 
