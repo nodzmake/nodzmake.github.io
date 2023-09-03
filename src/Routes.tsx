@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import App from './App'
 import Sheet from './components/Sheet'
 import Glider from './components/Glider'
+import DataImport from './components/DataImport'
 
 export const routes = [
   {
@@ -15,6 +16,10 @@ export const routes = [
   {
     path: '/glider',
     element: <Glider />
+  },
+  {
+    path: '/import',
+    element: <DataImport />
   }
 ]
 
