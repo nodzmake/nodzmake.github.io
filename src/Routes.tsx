@@ -2,19 +2,34 @@ import { Route, Routes } from 'react-router-dom'
 import App from './App'
 import Sheet from './components/Sheet'
 import Glider from './components/Glider'
+import Splash from './components/Splash'
+import NodzMakeSvg from './components/Splash/nodzmake'
+import COLORS from './utils/theme'
 
 export const routes = [
   {
     path: '/',
-    element: <App />
+    element: (
+      <Splash image={<NodzMakeSvg fill={COLORS['@primary-color']} />}>
+        <App />
+      </Splash>
+    )
   },
   {
     path: '/sheet',
-    element: <Sheet />
+    element: (
+      <Splash image={<NodzMakeSvg fill={COLORS['@primary-color']} />}>
+        <Sheet />
+      </Splash>
+    )
   },
   {
     path: '/glider',
-    element: <Glider />
+    element: (
+      <Splash image={<NodzMakeSvg fill={COLORS['@primary-color']} />}>
+        <Glider />
+      </Splash>
+    )
   }
 ]
 
