@@ -1,26 +1,12 @@
 import './App.css'
 import { APP_NAME } from './utils/constants'
-import { useEffect, useState } from 'react'
 import { Container, FlexContainer, PageContainer, SideMenu } from './layouts/'
 import COLORS from './utils/theme'
-import Splash from './components/Splash'
 import Output from './components/Output'
 import CanvasSettings from './components/CanvasSettings'
 
 const App = () => {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    document.title = APP_NAME
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 500)
-
-    return () => clearTimeout(timer)
-  }, [])
-  return loading ? (
-    <Splash />
-  ) : (
+  return (
     <Container>
       <SideMenu style={{ color: COLORS['@text-color'] }}>
         <h2>{APP_NAME}</h2>
