@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react'
 import { APP_NAME } from '../../utils/constants'
-import Splash from '../Splash'
-import {
-  Container,
-  FlexContainer,
-  PageContainer
-} from '../../layouts'
+import { Container, FlexContainer, PageContainer } from '../../layouts'
 import COLORS from '../../utils/theme'
 import { read, utils } from 'xlsx'
 
 const Sheet = () => {
-  const [loading, setLoading] = useState(true)
   interface President {
     Name: string
     Index: number
@@ -29,17 +23,9 @@ const Sheet = () => {
       const data: President[] = utils.sheet_to_json<President>(ws)
       setPres(data)
     })()
-
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 500)
-
-    return () => clearTimeout(timer)
   }, [])
 
-  return loading ? (
-    <Splash />
-  ) : (
+  return (
     <Container>
       <FlexContainer
         style={{
