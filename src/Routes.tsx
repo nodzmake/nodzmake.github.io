@@ -5,6 +5,7 @@ import Glider from './components/Glider'
 import Splash from './components/Splash'
 import NodzMakeSvg from './components/Splash/nodzmake'
 import COLORS from './utils/theme'
+import DataImport from './components/DataImport'
 
 export const routes = [
   {
@@ -28,6 +29,14 @@ export const routes = [
     element: (
       <Splash image={<NodzMakeSvg fill={COLORS['@primary-color']} />}>
         <Glider />
+      </Splash>
+    )
+  },
+  {
+    path: '/import',
+    element: (
+      <Splash image={<NodzMakeSvg fill={COLORS['@primary-color']} />}>
+        <DataImport />
       </Splash>
     )
   }
