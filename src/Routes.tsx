@@ -46,7 +46,7 @@ const AppRouter = () => {
   return (
     <Routes>
       {routes.map(r => (
-        <Route path={r.path} element={r.element} />
+        <Route path={r.path} element={r.element} key={r.path}/>
       ))}
     </Routes>
   )

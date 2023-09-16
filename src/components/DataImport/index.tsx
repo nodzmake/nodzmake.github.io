@@ -1,81 +1,83 @@
-import React, { useState } from 'react'
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
-import { message, Upload } from 'antd'
-import type { UploadChangeParam } from 'antd/es/upload'
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface'
+import { useEffect, useState } from 'react'
+import { Input } from 'antd'
+import { read, utils } from 'xlsx'
+import {
+  DataEditor,
+  GridColumn,
+  GridCellKind,
+  GridCell,
+  Item
+} from '@glideapps/glide-data-grid'
 import { AllowedFileTypes } from '../../utils/constants'
 
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result as string))
-  reader.readAsDataURL(img)
-}
+const DataImport = () => {
+  const [cols, setCols] = useState<GridColumn[]>([])
+  const [dataRows, setDataRows] = useState<any>()
+  const [jsonContent, setJsonContent] = useState<any>()
 
-interface MyComponentProps {
-  file: RcFile
-}
-
-const isFileAllowed = ({ file }: MyComponentProps) => {
-  return AllowedFileTypes.includes(file.type)
-}
-
-const beforeUpload = (file: RcFile) => {
-  let allowed = isFileAllowed({ file })
-  if (!allowed) {
-    message.error('You can only upload csv, txt, xlsx file!')
-  }
-  console.log({ file })
-
-  return allowed
-}
-
-const DataImport: React.FC = () => {
-  const [loading, setLoading] = useState(false)
-  const [imageUrl, setImageUrl] = useState<string>()
-
-  const handleChange: UploadProps['onChange'] = (
-    info: UploadChangeParam<UploadFile>
-  ) => {
-    console.log("handleChange",{info});
-    
-    if (info.file.status === 'uploading') {
-      console.log('uploading')
-      setLoading(true)
-      return
+  const readCSVFile = (file: any) => {
+    const reader = new FileReader()
+    reader.onload = (e: any) => {
+      const data = e.target.result
+      const workbook = read(data, { type: 'binary' })
+      const sheetName = workbook.SheetNames[0]
+      const sheet = workbook.Sheets[sheetName]
+      const jsonData = utils.sheet_to_json(sheet)
+      setJsonContent(jsonData)
     }
-    if (info.file.status === 'done') {
-      console.log('done')
+    reader.readAsBinaryString(file)
+  }
 
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj as RcFile, url => {
-        setLoading(false)
-        setImageUrl(url)
-      })
+  useEffect(() => {
+    if (!jsonContent) return
+    const colms = Object.keys(jsonContent[0] as any)
+    const gfx = colms.map(c => {
+      return { title: c.toString(), width: 100 }
+    })
+    setCols(gfx)
+    setDataRows(jsonContent.length)
+  }, [jsonContent])
+
+  const getData = ([col, row]: Item): GridCell => {
+    const record = jsonContent[row]
+    const content =
+      cols[col].title && record[cols[col].title]
+        ? record[cols[col].title].toString()
+        : 'nill'
+    return {
+      kind: GridCellKind.Text,
+      data: content,
+      allowOverlay: false,
+      displayData: content
     }
   }
 
-  const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  )
+  const handleFileChange = (event: any) => {
+    const file = event.target.files[0]
+    if (file) {
+      readCSVFile(file)
+    }
+  }
 
   return (
-    <Upload
-      name='avatar'
-      listType='picture-card'
-      className='avatar-uploader'
-      showUploadList={false}
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
-    >
-      {imageUrl ? (
-        <img src={imageUrl} alt='avatar' style={{ width: '100%' }} />
-      ) : (
-        uploadButton
+    <>
+      <Input
+        type='file'
+        name='csvFile'
+        placeholder='Upload csv'
+        onChange={handleFileChange}
+        accept={AllowedFileTypes.toString()}
+      />
+      {cols && dataRows && (
+        <DataEditor
+          columns={cols}
+          rows={dataRows}
+          getCellContent={getData}
+          width={'750px'}
+          height={'750px'}
+        />
       )}
-    </Upload>
+    </>
   )
 }
 
