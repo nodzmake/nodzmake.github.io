@@ -3,15 +3,15 @@ import { Input } from 'antd'
 import { read, utils } from 'xlsx'
 import {
   DataEditor,
-  GridColumn,
   GridCellKind,
   GridCell,
-  Item
+  Item,
+  SizedGridColumn
 } from '@glideapps/glide-data-grid'
 import { AllowedFileTypes } from '../../utils/constants'
 
 const DataImport = () => {
-  const [cols, setCols] = useState<GridColumn[]>([])
+  const [cols, setCols] = useState<SizedGridColumn[]>([])
   const [dataRows, setDataRows] = useState<any>()
   const [jsonContent, setJsonContent] = useState<any>()
 
@@ -73,8 +73,19 @@ const DataImport = () => {
           columns={cols}
           rows={dataRows}
           getCellContent={getData}
-          width={'750px'}
-          height={'750px'}
+          width={'100vw'}
+          height={'80vh'}
+          rowHeight={20}
+          maxColumnAutoWidth={900}
+          maxColumnWidth={900}
+          onColumnResizeEnd={(column, newSizeWithGrow) => {
+            const newCols = cols.map(c =>
+              c.title === column.title
+                ? { title: c.title, width: newSizeWithGrow }
+                : c
+            )
+            setCols(newCols)
+          }}
         />
       )}
     </>
