@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { LegacyRef, useEffect, useRef } from 'react'
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 
@@ -25,7 +25,7 @@ const BabylonScene = ({ width = 716, height = 407 }) => {
         new BABYLON.Vector3(0, 1, 0),
         scene
       )
-      console.log(light);
+      console.log(light)
       const box = BABYLON.MeshBuilder.CreateBox(
         'box',
         { size: 2, height: 2 },
@@ -56,7 +56,12 @@ const BabylonScene = ({ width = 716, height = 407 }) => {
       }
     }
   }, [])
-  return <canvas ref={canvasRef} style={{ width: width, height: height }} />
+  return (
+    <canvas
+      ref={canvasRef as unknown as LegacyRef<HTMLCanvasElement>}
+      style={{ width: width, height: height }}
+    />
+  )
 }
 
 export default BabylonScene
