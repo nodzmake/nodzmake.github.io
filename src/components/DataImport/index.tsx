@@ -1,19 +1,25 @@
-import { useEffect, useState } from 'react'
-import { Input } from 'antd'
+import '@glideapps/glide-data-grid/dist/index.css'
+import { useEffect, useMemo, useState } from 'react'
+import { Button, message } from 'antd'
 import { read, utils } from 'xlsx'
 import {
   DataEditor,
   GridCellKind,
   GridCell,
   Item,
-  SizedGridColumn
+  SizedGridColumn,
+  GridSelection,
+  EditableGridCell
 } from '@glideapps/glide-data-grid'
 import { AllowedFileTypes } from '../../utils/constants'
+import { createPortal } from 'react-dom'
+import { StyledFileInputButton } from './styles'
 
 const DataImport = () => {
   const [cols, setCols] = useState<SizedGridColumn[]>([])
   const [dataRows, setDataRows] = useState<any>()
   const [jsonContent, setJsonContent] = useState<any>()
+  const [gridSelection, setGridSelection] = useState<GridSelection>()
 
   const readCSVFile = (file: any) => {
     const reader = new FileReader()
@@ -30,25 +36,37 @@ const DataImport = () => {
 
   useEffect(() => {
     if (!jsonContent) return
-    const colms = Object.keys(jsonContent[0] as any)
-    const gfx = colms.map(c => {
+    const columns = Object.keys(jsonContent[0] as any)
+    const columnData = columns.map(c => {
       return { title: c.toString(), width: 100 }
     })
-    setCols(gfx)
+    setCols(columnData)
     setDataRows(jsonContent.length)
   }, [jsonContent])
 
-  const getData = ([col, row]: Item): GridCell => {
+  const getData = ([col, row]: Item): EditableGridCell => {
     const record = jsonContent[row]
-    const content =
-      cols[col].title && record[cols[col].title]
-        ? record[cols[col].title].toString()
-        : 'nill'
-    return {
-      kind: GridCellKind.Text,
-      data: content,
-      allowOverlay: false,
-      displayData: content
+    try {
+      const content =
+        cols[col].title && record[cols[col].title]
+          ? record[cols[col].title].toString()
+          : ''
+      return {
+        kind: GridCellKind.Text,
+        data: content,
+        allowOverlay: true,
+        displayData: content,
+        readonly: false
+      }
+    } catch (err) {
+      const content = '$err'
+      return {
+        kind: GridCellKind.Text,
+        data: content,
+        allowOverlay: true,
+        displayData: content,
+        readonly: false
+      }
     }
   }
 
@@ -59,9 +77,16 @@ const DataImport = () => {
     }
   }
 
+  const updateCellData = (cell: Item, newValue: any) => {
+    const [col, row] = cell
+    let oldJson = jsonContent
+    oldJson[row][cols[col].title] = newValue.data
+    setJsonContent(oldJson)
+  }
+
   return (
     <>
-      <Input
+      <StyledFileInputButton
         type='file'
         name='csvFile'
         placeholder='Upload csv'
@@ -75,7 +100,10 @@ const DataImport = () => {
           getCellContent={getData}
           width={'100vw'}
           height={'80vh'}
-          rowHeight={20}
+          rowHeight={40}
+          onCellEdited={(cell: Item, newValue: EditableGridCell) =>
+            updateCellData(cell, newValue)
+          }
           maxColumnAutoWidth={900}
           maxColumnWidth={900}
           onColumnResizeEnd={(column, newSizeWithGrow) => {
@@ -86,8 +114,14 @@ const DataImport = () => {
             )
             setCols(newCols)
           }}
+          gridSelection={gridSelection}
+          onGridSelectionChange={e => {
+            setGridSelection(e)
+          }}
+          columnSelect='multi'
         />
       )}
+      {createPortal(<div id='portal'></div>, document.body)}
     </>
   )
 }
