@@ -73,6 +73,15 @@ const DataImport = () => {
   const handleFileChange = (event: any) => {
     const file = event.target.files[0]
     if (file) {
+      if (file.size > 1000000) {
+        message.warning(
+          `File size ${(file.size / 1000000).toFixed(
+            1
+          )} mb exceeded limit 1 mb`,
+          3
+        )
+        return
+      }
       readCSVFile(file)
     }
   }
