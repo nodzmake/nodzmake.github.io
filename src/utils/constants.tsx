@@ -18,6 +18,8 @@ export const TAGLINES = [
   'Unveil the Story in Data'
 ]
 
+export const MAX_FILE_SIZE = 100000000
+
 /**
 The domain name "submars.com" could be interpreted in various ways, and its suitability for a particular use, such as a Saas (Software as a Service) application, would depend on your specific business concept and branding strategy. Here are a few possible associations or interpretations that people might make with the name "submars":
 Submarine Theme: The term "sub" suggests something beneath the surface, hidden, or submerged. This could be used metaphorically to imply that your Saas application offers in-depth or hidden insights, data, or solutions to its users.
