@@ -4,8 +4,15 @@ import { Container, FlexContainer, PageContainer, SideMenu } from './layouts/'
 import COLORS from './utils/theme'
 import Output from './components/Output'
 import CanvasSettings from './components/CanvasSettings'
+import { useLocation } from 'react-router-dom'
 
 const App = () => {
+  const location = useLocation()
+  const data = location.state
+
+  // utilize this data according to business logic
+  if (data) console.log({ data })
+
   return (
     <Container>
       <SideMenu style={{ color: COLORS['@text-color'] }}>
