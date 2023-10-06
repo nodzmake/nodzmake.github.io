@@ -129,14 +129,35 @@ const DataImport = () => {
 
   return (
     <>
-      <StyledFileInputButton
-        type='file'
-        name='csvFile'
-        placeholder='Upload csv'
-        onChange={handleFileChange}
-        accept={AllowedFileTypes.toString()}
-      />
-      {cols && dataRows && (
+      {!jsonContent && (
+        <StyledFileInputButton
+          type='file'
+          name='csvFile'
+          placeholder='Upload csv'
+          onChange={handleFileChange}
+          accept={AllowedFileTypes.toString()}
+        />
+      )}
+      {jsonContent && (
+        <Button
+          onClick={() => {
+            setJsonContent('')
+            navigate('/import')
+          }}
+        >
+          Reload Csv
+        </Button>
+      )}
+      {selectedColumnCount > 0 && (
+        <Button
+          onClick={() => {
+            setShowSaveModal(true)
+          }}
+        >
+          Proceed with ({selectedColumnCount}) Selected columns
+        </Button>
+      )}
+      {cols && dataRows && jsonContent && (
         <DataEditor
           columns={cols}
           rows={dataRows}
@@ -165,15 +186,6 @@ const DataImport = () => {
         />
       )}
 
-      {selectedColumnCount > 0 && (
-        <Button
-          onClick={() => {
-            setShowSaveModal(true)
-          }}
-        >
-          Proceed with ({selectedColumnCount}) Selected columns
-        </Button>
-      )}
       <DataTransform
         visible={showSaveModal}
         handleCancel={() => setShowSaveModal(false)}

@@ -1,4 +1,4 @@
-export const APP_NAME = 'NodzMake'
+export const APP_NAME = process.env.REACT_APP_SITE_TITLE || 'NodzMake'
 
 export const AllowedFileTypes = [
   'text/csv',

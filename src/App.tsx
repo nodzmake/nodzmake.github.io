@@ -4,14 +4,24 @@ import { Container, FlexContainer, PageContainer, SideMenu } from './layouts/'
 import COLORS from './utils/theme'
 import Output from './components/Output'
 import CanvasSettings from './components/CanvasSettings'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 const App = () => {
   const location = useLocation()
   const data = location.state
+  const [csvData, setCsvData] = useState('')
+  const navigate = useNavigate()
 
-  // utilize this data according to business logic
-  if (data) console.log({ data })
+  useEffect(() => {
+    if (data) {
+      setCsvData(data)
+    } else {
+      navigate('/import')
+    }
+  }, [data, navigate])
+
+  if (!data) return null
 
   return (
     <Container>
@@ -39,7 +49,7 @@ const App = () => {
             alignItems: 'center'
           }}
         >
-          <Output />
+          <Output data={csvData} />
         </PageContainer>
         <SideMenu
           style={{

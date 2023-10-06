@@ -2,8 +2,32 @@ import { LegacyRef, useEffect, useRef } from 'react'
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 
-const BabylonScene = ({ width = 716, height = 407 }) => {
+type props = {
+  data: any
+  width?: number
+  height?: number
+}
+
+const BabylonScene = ({ width = 716, height = 407, data }: props) => {
   const canvasRef = useRef()
+
+  const createBox = (
+    scene: any,
+    material: any,
+    boxSize: any,
+    boxHeight: any,
+    posX: any,
+    posY: any,
+    posZ: any
+  ) => {
+    const box = BABYLON.MeshBuilder.CreateBox(
+      'box',
+      { size: boxSize, height: boxHeight },
+      scene
+    )
+    box.position = new BABYLON.Vector3(posX, posY, posZ)
+    box.material = material
+  }
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -26,26 +50,16 @@ const BabylonScene = ({ width = 716, height = 407 }) => {
         scene
       )
       console.log(light)
-      const box = BABYLON.MeshBuilder.CreateBox(
-        'box',
-        { size: 2, height: 2 },
-        scene
-      )
 
-      // Create a material with the desired color
       const material = new BABYLON.StandardMaterial('boxMaterial', scene)
       material.diffuseColor = new BABYLON.Color3(0.4, 0.6, 0.8) // RGB color values (0 to 1)
-      box.material = material
 
-      const box1 = BABYLON.MeshBuilder.CreateBox(
-        'box',
-        { size: 2, height: 40 },
-        scene
-      )
-      box1.position = new BABYLON.Vector3(4, 0, 0) // Set x, y, z coordinates
-
-      // Apply the material to the box
-      box1.material = material
+      if (data) {
+        data.map((obj: any, i: any) => {
+          createBox(scene, material, i, i, i * i, i / 2, 0)
+          return obj
+        })
+      }
 
       engine.runRenderLoop(() => {
         scene.render()
@@ -55,7 +69,8 @@ const BabylonScene = ({ width = 716, height = 407 }) => {
         engine.dispose()
       }
     }
-  }, [])
+  }, [data])
+
   return (
     <canvas
       ref={canvasRef as unknown as LegacyRef<HTMLCanvasElement>}

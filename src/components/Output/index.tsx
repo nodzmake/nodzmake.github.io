@@ -1,9 +1,13 @@
-import BabylonScene from '../Babylon';
+import BabylonScene from '../Babylon'
 
-const Output = () => {
+type props = {
+  data: any
+}
+
+const Output = ({ data }: props) => {
   return (
     <div>
-      <BabylonScene/>
+      <BabylonScene data={data} />
     </div>
   )
 }
