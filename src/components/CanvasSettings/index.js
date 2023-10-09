@@ -192,7 +192,7 @@ const StyledCollapse = styled(Collapse)`
   }
 `
 
-const CanvasSettings = ({ bColor }: any) => {
+const CanvasSettings = ({ bColor }) => {
   const items = [
     {
       key: '1',

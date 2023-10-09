@@ -1,9 +1,9 @@
 export const objWithSelectiveFields = (
-  oldArray: any,
-  propertyNames: Array<string>
+  oldArray,
+  propertyNames
 ) => {
-  return oldArray.map((item: any) => {
-    const newObj: any = {}
+  return oldArray.map((item) => {
+    const newObj = {}
     propertyNames.forEach(propertyName => {
       newObj[propertyName] = item[propertyName]
     })

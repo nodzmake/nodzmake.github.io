@@ -1,4 +1,3 @@
-import { ReactNode} from 'react';
 import styled from 'styled-components'
 
 const BackDrop = styled.div`
@@ -56,11 +55,8 @@ const DipDiv = styled.div`
     );
   background-size: auto, auto 132px, auto;
 `
-type milk ={
-message: string
-children?:ReactNode
-}
-const Dip = ({message="Dev in progress",children}:milk) => {
+
+const Dip = ({message="Dev in progress",children}) => {
   return (
     <BackDrop>
       {children}

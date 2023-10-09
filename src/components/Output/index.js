@@ -1,10 +1,7 @@
 import BabylonScene from '../Babylon'
 
-type props = {
-  data: any
-}
 
-const Output = ({ data }: props) => {
+const Output = ({ data }) => {
   return (
     <div>
       <BabylonScene data={data} />

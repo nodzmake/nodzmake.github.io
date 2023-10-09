@@ -1,25 +1,19 @@
 import { useEffect, useState } from 'react'
 import {
   DataEditor,
-  GridCellKind,
-  GridCell,
-  Item,
-  SizedGridColumn,
-  GridSelection
+  GridCellKind
 } from '@glideapps/glide-data-grid'
 
-type JsonSheetProps = {
-  jsonSource: any
-}
 
-const JsonSheet = ({ jsonSource }: JsonSheetProps) => {
-  const [cols, setCols] = useState<SizedGridColumn[]>([])
-  const [dataRows, setDataRows] = useState<any>()
-  const [gridSelection, setGridSelection] = useState<GridSelection>()
+
+const JsonSheet = ({ jsonSource }) => {
+  const [cols, setCols] = useState([])
+  const [dataRows, setDataRows] = useState()
+  const [gridSelection, setGridSelection] = useState()
 
   useEffect(() => {
     if (!jsonSource) return
-    const columns = Object.keys(jsonSource[0] as any)
+    const columns = Object.keys(jsonSource[0])
     const columnData = columns.map(c => {
       return { title: c.toString(), width: 100 }
     })
@@ -27,7 +21,7 @@ const JsonSheet = ({ jsonSource }: JsonSheetProps) => {
     setDataRows(jsonSource.length)
   }, [jsonSource])
 
-  const getData = ([col, row]: Item): GridCell => {
+  const getData = ([col, row])  => {
     const record = jsonSource[row]
     const content =
       cols[col].title && record[cols[col].title]

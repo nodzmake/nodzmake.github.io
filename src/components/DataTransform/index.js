@@ -1,14 +1,5 @@
 import { StyledModal } from './styles'
 
-type props = {
-  visible: boolean
-  jsonData: any
-  selectedColumnCount?: number
-  selectedColumns: Array<number>
-  handleCancel: () => void
-  handleOk: () => void
-  children: any
-}
 
 const DataTransform = ({
   visible,
@@ -17,7 +8,7 @@ const DataTransform = ({
   jsonData,
   selectedColumnCount,
   children
-}: props) => {
+}) => {
 
   return (
     <StyledModal

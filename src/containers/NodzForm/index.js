@@ -3,7 +3,7 @@ import { genNodz } from '../../api'
 import NodzForm from '../../components/NodzForm'
 
 const NodzFormContainer = () => {
-  const handleSubmit = (e: { num: number }) => genNodz(e.num)
+  const handleSubmit = (e) => genNodz(e.num)
   // const handleEdit = () => null
   const validateForm = () => null
   return (

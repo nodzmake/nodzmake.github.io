@@ -1,6 +1,6 @@
 import './App.css'
 import { APP_NAME } from './utils/constants'
-import { Container, FlexContainer, PageContainer, SideMenu } from './layouts/'
+import { Container, FlexContainer, PageContainer, SideMenu } from './layouts'
 import COLORS from './utils/theme'
 import Output from './components/Output'
 import CanvasSettings from './components/CanvasSettings'

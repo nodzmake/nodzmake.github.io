@@ -3,15 +3,12 @@ import { APP_NAME } from '../../utils/constants'
 import NodzMakeSvg from './nodzmake'
 import COLORS from '../../utils/theme'
 import HandwritingTagline from './Tagline'
-interface MyComponentProps {
-  children: ReactNode | JSX.Element
-  image?: JSX.Element
-}
+
 
 const Splash = ({
   children,
   image = <NodzMakeSvg fill={COLORS['@primary-color']} />
-}: MyComponentProps) => {
+}) => {
   const [loading, setLoading] = useState(true)
 
   useLayoutEffect(() => {

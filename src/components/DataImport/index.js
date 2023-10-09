@@ -4,11 +4,7 @@ import { Button, message } from 'antd'
 import { read, utils } from 'xlsx'
 import {
   DataEditor,
-  GridCellKind,
-  Item,
-  SizedGridColumn,
-  GridSelection,
-  EditableGridCell
+  GridCellKind
 } from '@glideapps/glide-data-grid'
 import { AllowedFileTypes, MAX_FILE_SIZE } from '../../utils/constants'
 import DataTransform from '../DataTransform'
@@ -19,11 +15,11 @@ import { objWithSelectiveFields } from '../../utils'
 import { useNavigate } from 'react-router-dom'
 
 const DataImport = () => {
-  const [cols, setCols] = useState<SizedGridColumn[]>([])
-  const [dataRows, setDataRows] = useState<any>()
-  const [jsonContent, setJsonContent] = useState<any>()
-  const [showSaveModal, setShowSaveModal] = useState<boolean>(false)
-  const [gridSelection, setGridSelection] = useState<GridSelection>()
+  const [cols, setCols] = useState([])
+  const [dataRows, setDataRows] = useState()
+  const [jsonContent, setJsonContent] = useState()
+  const [showSaveModal, setShowSaveModal] = useState(false)
+  const [gridSelection, setGridSelection] = useState()
   const navigate = useNavigate()
 
   const selectedColumns = useMemo(() => {
@@ -55,9 +51,9 @@ const DataImport = () => {
     }
   }, [jsonContent, selectedColumns, selectColumnNames])
 
-  const readCSVFile = (file: any) => {
+  const readCSVFile = (file) => {
     const reader = new FileReader()
-    reader.onload = (e: any) => {
+    reader.onload = (e) => {
       const data = e.target.result
       const workbook = read(data, { type: 'binary' })
       const sheetName = workbook.SheetNames[0]
@@ -70,7 +66,7 @@ const DataImport = () => {
 
   useEffect(() => {
     if (!jsonContent) return
-    const columns = Object.keys(jsonContent[0] as any)
+    const columns = Object.keys(jsonContent[0])
     const columnData = columns.map(c => {
       return { title: c.toString(), width: 100 }
     })
@@ -78,7 +74,7 @@ const DataImport = () => {
     setDataRows(jsonContent.length)
   }, [jsonContent])
 
-  const getData = ([col, row]: Item): EditableGridCell => {
+  const getData = ([col, row]) => {
     const record = jsonContent[row]
     try {
       const content =
@@ -104,7 +100,7 @@ const DataImport = () => {
     }
   }
 
-  const handleFileChange = (event: any) => {
+  const handleFileChange = (event) => {
     const file = event.target.files[0]
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
@@ -120,7 +116,7 @@ const DataImport = () => {
     }
   }
 
-  const updateCellData = (cell: Item, newValue: any) => {
+  const updateCellData = (cell, newValue) => {
     const [col, row] = cell
     let oldJson = jsonContent
     oldJson[row][cols[col].title] = newValue.data
@@ -165,7 +161,7 @@ const DataImport = () => {
           width={'100vw'}
           height={'80vh'}
           rowHeight={40}
-          onCellEdited={(cell: Item, newValue: EditableGridCell) =>
+          onCellEdited={(cell, newValue) =>
             updateCellData(cell, newValue)
           }
           maxColumnAutoWidth={900}

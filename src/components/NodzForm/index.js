@@ -1,7 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import { propType } from './propType'
 
-const NodzForm = ({ initialValues, handleSubmit, validateForm }: propType) => {
+const NodzForm = ({ initialValues, handleSubmit, validateForm }) => {
   return (
     <Formik
       initialValues={initialValues}
