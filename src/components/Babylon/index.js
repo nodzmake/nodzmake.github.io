@@ -1,24 +1,19 @@
-import { LegacyRef, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 
-type props = {
-  data: any
-  width?: number
-  height?: number
-}
 
-const BabylonScene = ({ width = 716, height = 407, data }: props) => {
+const BabylonScene = ({ width = 716, height = 407, data }) => {
   const canvasRef = useRef()
 
   const createBox = (
-    scene: any,
-    material: any,
-    boxSize: any,
-    boxHeight: any,
-    posX: any,
-    posY: any,
-    posZ: any
+    scene,
+    material,
+    boxSize,
+    boxHeight,
+    posX,
+    posY,
+    posZ
   ) => {
     const box = BABYLON.MeshBuilder.CreateBox(
       'box',
@@ -55,7 +50,7 @@ const BabylonScene = ({ width = 716, height = 407, data }: props) => {
       material.diffuseColor = new BABYLON.Color3(0.4, 0.6, 0.8) // RGB color values (0 to 1)
 
       if (data) {
-        data.map((obj: any, i: any) => {
+        data.map((obj, i) => {
           createBox(scene, material, i, i, i * i, i / 2, 0)
           return obj
         })
@@ -73,7 +68,7 @@ const BabylonScene = ({ width = 716, height = 407, data }: props) => {
 
   return (
     <canvas
-      ref={canvasRef as unknown as LegacyRef<HTMLCanvasElement>}
+      ref={canvasRef}
       style={{ width: width, height: height }}
     />
   )
