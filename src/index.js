@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom/client'
 import AppRouter from './Routes'
 import './index.css'
 
+
+  // ╭────────────────────────────────────────────────────────────────╮
+  // │                                                                │
+  // │      New major version of npm available! 6.14.6 → 10.2.0       │
+  // │   Changelog: https://github.com/npm/cli/releases/tag/v10.2.0   │
+  // │               Run npm install -g npm to update!                │
+  // │                                                                │
+  // ╰────────────────────────────────────────────────────────────────╯
+
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import Navigator from './components/Devs/Navigator'

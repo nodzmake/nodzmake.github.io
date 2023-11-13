@@ -11,8 +11,9 @@ const App = () => {
   const location = useLocation()
   const data = location.state
   const [csvData, setCsvData] = useState('')
-  const navigate = useNavigate()
+  const [settings, setSettings] = useState({})
 
+  const navigate = useNavigate()
   useEffect(() => {
     if (data) {
       setCsvData(data)
@@ -27,9 +28,9 @@ const App = () => {
     <Container>
       <SideMenu style={{ color: COLORS['@text-color'] }}>
         <h2>{APP_NAME}</h2>
-        <li>home</li>
-        <li>home</li>
-        <li>home</li>
+        <li>Sea</li>
+        <li>Mars</li>
+        <li>Ice</li>
         <li>home</li>
         <li>home</li>
       </SideMenu>
@@ -49,7 +50,7 @@ const App = () => {
             alignItems: 'center'
           }}
         >
-          <Output data={csvData} />
+          <Output data={csvData} settings={settings}/>
         </PageContainer>
         <SideMenu
           style={{
@@ -60,7 +61,11 @@ const App = () => {
             justifyContent: 'flex-end'
           }}
         >
-          <CanvasSettings bColor={COLORS['@primary-color']} />
+          <CanvasSettings
+            bColor={COLORS['@primary-color']}
+            settings={settings}
+            setSettings={setSettings}
+          />
         </SideMenu>
       </FlexContainer>
     </Container>

@@ -2,19 +2,10 @@ import { useEffect, useRef } from 'react'
 import * as BABYLON from 'babylonjs'
 import 'babylonjs-loaders'
 
-
-const BabylonScene = ({ width = 716, height = 407, data }) => {
+const BabylonScene = ({ width = 716, height = 407, data, settings }) => {
   const canvasRef = useRef()
 
-  const createBox = (
-    scene,
-    material,
-    boxSize,
-    boxHeight,
-    posX,
-    posY,
-    posZ
-  ) => {
+  const createBox = (scene, material, boxSize, boxHeight, posX, posY, posZ) => {
     const box = BABYLON.MeshBuilder.CreateBox(
       'box',
       { size: boxSize, height: boxHeight },
@@ -47,7 +38,10 @@ const BabylonScene = ({ width = 716, height = 407, data }) => {
       console.log(light)
 
       const material = new BABYLON.StandardMaterial('boxMaterial', scene)
-      material.diffuseColor = new BABYLON.Color3(0.4, 0.6, 0.8) // RGB color values (0 to 1)
+      if (settings && settings.color) {
+        const { h, s, v } = settings.color
+        material.diffuseColor = new BABYLON.Color3.FromHSV(h, s, v)
+      }
 
       if (data) {
         data.map((obj, i) => {
@@ -64,14 +58,9 @@ const BabylonScene = ({ width = 716, height = 407, data }) => {
         engine.dispose()
       }
     }
-  }, [data])
+  }, [data, settings])
 
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{ width: width, height: height }}
-    />
-  )
+  return <canvas ref={canvasRef} style={{ width: width, height: height }} />
 }
 
 export default BabylonScene
