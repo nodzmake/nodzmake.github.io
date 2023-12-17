@@ -1,5 +1,5 @@
-import { Input } from 'antd'
 import styled from 'styled-components'
+import Input from '../../UiKit/Input'
 
 export const StyledFileInputButton = styled(Input)`
   display: flex;

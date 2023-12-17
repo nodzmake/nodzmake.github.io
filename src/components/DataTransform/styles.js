@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Modal } from 'antd'
+import Modal from '../../UiKit/Modal'
 export const StyledModal = styled(Modal)`
   .ant-modal-content {
     // width: 80vw;
