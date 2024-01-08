@@ -1,6 +1,9 @@
-import { Collapse, Slider, Button, InputNumber, ColorPicker, Radio } from 'antd'
+import { Collapse, Slider, InputNumber, ColorPicker, Radio } from 'antd'
+import Button from '../../UiKit/Button'
 import styled from 'styled-components'
 import { skyEnvironments } from '../Babylon/Utils'
+const prefixCls = process.env.REACT_APP_CSS_PREFIX_CLASS
+
 
 const StyledRadio = styled(Radio)``
 
@@ -88,23 +91,23 @@ const StyledInput = styled.input`
 `
 
 const StyledCollapse = styled(Collapse)`
-  .ant-collapse {
+  .${prefixCls}-collapse {
     color: #fff;
   }
 
-  .ant-collapse-item {
+  .${prefixCls}-collapse-item {
     border-bottom: 0.01px solid #494949;
   }
 
-  .ant-motion-collapse {
+  .${prefixCls}-motion-collapse {
     transition: height 0.005s !important;
   }
-  .ant-collapse-header .ant-collapse-arrow {
+  .${prefixCls}-collapse-header .${prefixCls}-collapse-arrow {
     font-size: 1rem !important;
     padding-right: 2.5px;
   }
 
-  .ant-collapse-expand-icon {
+  .${prefixCls}-collapse-expand-icon {
     text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
     --vh: 7.3px;
@@ -143,24 +146,24 @@ const StyledCollapse = styled(Collapse)`
     }
   }
 
-  .ant-collapse-header .ant-collapse-expand-icon {
+  .${prefixCls}-collapse-header .${prefixCls}-collapse-expand-icon {
     justify-content: end;
   }
 
-  .ant-collapse-item {
+  .${prefixCls}-collapse-item {
     border-bottom: 1px solid #303030;
   }
 
-  .ant-collapse-header {
+  .${prefixCls}-collapse-header {
     color: #fff;
     padding-inline-start: 2px;
   }
 
-  .ant-collapse-content-box {
+  .${prefixCls}-collapse-content-box {
     color: #fff;
   }
 
-  .ant-collapse-header-text {
+  .${prefixCls}-collapse-header-text {
     color: #fff;
     text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -188,7 +191,7 @@ const StyledCollapse = styled(Collapse)`
     text-overflow: ellipsis;
   }
 
-  .ant-collapse-content {
+  .${prefixCls}-collapse-content {
   }
 `
 

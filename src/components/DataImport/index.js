@@ -1,7 +1,8 @@
 import '@glideapps/glide-data-grid/dist/index.css'
 import { useEffect, useMemo, useState } from 'react'
-import { Button, message } from 'antd'
+import { message } from 'antd'
 import { read, utils } from 'xlsx'
+import Button from '../../UiKit/Button'
 import {
   DataEditor,
   GridCellKind
